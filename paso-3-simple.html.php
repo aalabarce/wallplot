@@ -98,14 +98,19 @@
 			<div id="status">
 			</div>
 
+			<!--
 			<div id="imagenes">
 			</div>
+			-->
 
 			<div id="template-imagen" class="hidden">
-				<div class="imagen-sel">
-					<img src="#URL_IMAGEN#" style="height:100px" id="#IMG_GRANDE#">
-				</div>
+				<img src="#URL_IMAGEN#" style="height:100px" id="#IMG_GRANDE#" class="multiple-borders">
 			</div>
+
+			<table id="fb_gallery">
+
+			</table>
+			
 			<div id="next-page" class="btn-continuar">Siguiente >></div>
 			<div id="prev-page" class="btn-continuar"><< Anterior</div>
 			<input id="next-hidden" type="hidden"></input>

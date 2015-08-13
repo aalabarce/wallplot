@@ -1,0 +1,420 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css/general.css">
+	<link href='http://fonts.googleapis.com/css?family=Lato:400,700|Open+Sans:400,300' rel='stylesheet' type='text/css'>
+	<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="js/jquery.modal.min.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="css/jquery.modal.css" type="text/css" media="screen" />
+	<link href="css/uploadfile.min.css" rel="stylesheet">
+	<script src="js/jquery.uploadfile.min.js"></script>
+	<script src="js/drag-image.js"></script>
+
+	<script>
+	  // This is called with the results from from FB.getLoginStatus().
+	  function statusChangeCallback(response) {
+	    console.log('statusChangeCallback');
+	    console.log(response);
+	    // The response object is returned with a status field that lets the
+	    // app know the current login status of the person.
+	    // Full docs on the response object can be found in the documentation
+	    // for FB.getLoginStatus().
+	    if (response.status === 'connected') {
+	      // Logged into your app and Facebook.
+	      getUserPhotos();
+	      $("#btn-fbk").addClass("hidden");
+	    } else if (response.status === 'not_authorized') {
+	      // The person is logged into Facebook, but not your app.
+	      document.getElementById('status').innerHTML = 'Please log ' +
+	        'into this app.';
+	    } else {
+	      // The person is not logged into Facebook, so we're not sure if
+	      // they are logged into this app or not.
+	      document.getElementById('status').innerHTML = 'Please log ' +
+	        'into Facebook.';
+	    }
+	  }
+
+	  // This function is called when someone finishes with the Login
+	  // Button.  See the onlogin handler attached to it in the sample
+	  // code below.
+	  function checkLoginState() {
+	    FB.getLoginStatus(function(response) {
+	      statusChangeCallback(response);
+	    });
+	  }
+
+	  window.fbAsyncInit = function() {
+	  FB.init({
+	    appId      : '1528694377358712',
+	    cookie     : true,  // enable cookies to allow the server to access 
+	                        // the session
+	    xfbml      : true,  // parse social plugins on this page
+	    version    : 'v2.1' // use version 2.1
+	  });
+
+	  // Now that we've initialized the JavaScript SDK, we call 
+	  // FB.getLoginStatus().  This function gets the state of the
+	  // person visiting this page and can return one of three states to
+	  // the callback you provide.  They can be:
+	  //
+	  // 1. Logged into your app ('connected')
+	  // 2. Logged into Facebook, but not your app ('not_authorized')
+	  // 3. Not logged into Facebook and can't tell if they are logged into
+	  //    your app or not.
+	  //
+	  // These three cases are handled in the callback function.
+
+	  FB.getLoginStatus(function(response) {
+	    statusChangeCallback(response);
+	  });
+
+	  };
+
+	  // Load the SDK asynchronously
+	  (function(d, s, id) {
+	    var js, fjs = d.getElementsByTagName(s)[0];
+	    if (d.getElementById(id)) return;
+	    js = d.createElement(s); js.id = id;
+	    js.src = "//connect.facebook.net/en_US/sdk.js";
+	    fjs.parentNode.insertBefore(js, fjs);
+	  }(document, 'script', 'facebook-jssdk'));
+
+	  // Here we run a very simple test of the Graph API after login is
+	  // successful.  See statusChangeCallback() for when this call is made.
+	  function testAPI() {
+	    console.log('Welcome!  Fetching your information.... ');
+	    FB.api('/me', function(response) {
+	      console.log('Successful login for: ' + response.name);
+	      document.getElementById('status').innerHTML =
+	        'Thanks for logging in, ' + response.name + '!';
+	    });
+	  }
+
+	  function getUserPhotos()
+	  {
+	  	FB.api(
+			    "/me/photos",
+			    function (response) {
+			      if (response && !response.error) {
+			      dibujarImagenes(response.data);
+			      console.log(response);
+
+			      nextPage = response.paging.next;     
+			      $("#next-hidden").val(nextPage);
+
+			      prevPage = response.paging.previous;
+			 	  $("#prev-hidden").val(prevPage);
+
+			      if (typeof nextPage != 'undefined')
+					{
+						$("#next-page").removeClass("hidden");
+					}
+					else
+					{
+						$("#next-page").addClass("hidden");
+					}
+
+				 	if (typeof prevPage != 'undefined')
+					{
+						$("#prev-page").removeClass("hidden");
+					}
+					else
+					{
+						$("#prev-page").addClass("hidden");
+					}
+	         		  
+			      }
+			    }
+			);
+	  }
+
+	  function dibujarImagenes(imagenes)
+	  {
+	  	$(imagenes).each(function(i,e){
+
+	  		html = $("#template-imagen").html();
+	  		html = html.replace(/#URL_IMAGEN#/g, e.picture);
+	  		html =  html.replace(/#IMG_GRANDE#/g, e.source);
+
+	  		$("#imagenes").append(html);
+
+	  	});
+
+	  	$(".imagen-sel").click(function() {
+			img = "url(" + $(this).children().attr('id') + ")";
+	  		$(lei).css("background-image", img);
+	  		$(lei).backgroundDraggable();
+		})
+	  }
+
+	$(function() {
+
+		lei = null;
+
+		$("#fileuploader").uploadFile({
+			url:"upload.php",
+			fileName:"myfile",
+			onSuccess:function(files,data,xhr)
+			{	
+				// data trae el nombre de la imagen correspondiente
+				img = "url(uploads/temp/" + data.substr(2, data.length - 4) + ".jpg)";
+	  			$(lei).css("background-image", img);
+	  			$(lei).backgroundDraggable();
+			}
+		});
+
+		$("#btn-fb").click(function() {
+
+			$("#tab-fb").removeClass("hidden");
+
+			$("#tab-ig").addClass("hidden");
+			$("#tab-tupc").addClass("hidden");
+		});
+
+		$("#btn-ig").click(function() {
+
+			$("#tab-ig").removeClass("hidden");
+
+			$("#tab-fb").addClass("hidden");
+			$("#tab-tupc").addClass("hidden");
+
+		});
+
+		$("#btn-pc").click(function() {
+
+			$("#tab-tupc").removeClass("hidden");
+
+			$("#tab-fb").addClass("hidden");
+			$("#tab-ig").addClass("hidden");
+
+		});
+
+
+		$(".btn-elegir").click(function() {
+			lei = $(this).parent();
+			$(lei).css("background-position", "0 0");			
+			$("#modal-imagen").modal();
+
+		});
+
+		$("#next-page").click(function(){
+
+			nextPage = $("#next-hidden").val();
+			$.get( nextPage, function( response ) {
+			 	console.log(response);
+			 	$("#imagenes").html("");
+			 	dibujarImagenes(response.data);
+
+			 	nextPage = response.paging.next;
+			 	$("#next-hidden").val(nextPage);
+
+			 	prevPage = response.paging.previous;
+			 	$("#prev-hidden").val(prevPage);
+
+			 	if (typeof nextPage != 'undefined')
+				{
+					$("#next-page").removeClass("hidden");
+				}
+				else
+				{
+					$("#next-page").addClass("hidden");
+				}
+
+			 	if (typeof prevPage != 'undefined')
+				{
+					$("#prev-page").removeClass("hidden");
+				}
+				else
+				{
+					$("#prev-page").addClass("hidden");
+				}
+			});
+
+		})
+
+		$("#prev-page").click(function(){
+			
+			prevPage = $("#prev-hidden").val();
+			$.get( prevPage, function( response ) {
+			 	console.log(response);
+			 	$("#imagenes").html("");
+			 	dibujarImagenes(response.data);
+
+			 	nextPage = response.paging.next;
+			 	$("#next-hidden").val(nextPage);
+
+			 	prevPage = response.paging.previous;
+			 	$("#prev-hidden").val(prevPage);
+
+			 	if (typeof nextPage != 'undefined')
+				{
+					$("#next-page").removeClass("hidden");
+				}
+				else
+				{
+					$("#next-page").addClass("hidden");
+				}
+
+			 	if (typeof prevPage != 'undefined')
+				{
+					$("#prev-page").removeClass("hidden");
+				}
+				else
+				{
+					$("#prev-page").addClass("hidden");
+				}
+			});
+		})
+
+
+	})
+	</script>
+
+	<style>
+		#modal-imagen.modal { 
+			width: 800px; 
+			height: 500px;
+			overflow-y: scroll;
+		}
+	</style>
+	</head>
+<body>
+	<div>
+		<!-- HEADER -->
+		<div id="header" class="fondo-menu">
+			<div id="contenedor-header">
+				<a href="/"><div id="logo-wp"></div></a>
+				<div id="menu">
+					<span class="item-menu">Sobre Wallplot</span>
+					<span class="item-menu item-seleccionado">Comencemos</span>
+					<span class="item-menu">Inspiracion</span>
+					<span class="item-menu">Tama&ntilde;os y precios</span>
+					<span class="item-menu">Contactenos</span>
+			</div>
+			</div>
+		</div>
+		<!-- FIN HEADER -->
+		<!-- CONTENIDO -->
+		<div id="contenedor">
+
+			<div class="pasos">
+				<div class="numero-pasos">
+					<img src="img/paso-2.jpg">
+				</div>	
+				<div class="titulo-pasos pasos-oscuro">
+					eleg&iacute; tu lienzo para imprimir
+				</div>
+			</div>	
+			<div id="contenedor-pasos-sub">
+				<div class="pasos-sub">
+					A- Seleccionar tipo y medida del lienzo
+				</div>	
+				<div class="btn-continuar">
+					Continuar >
+				</div>
+			</div>
+
+			<!--<div id="btn-abrir-modal" class="btn-continuar">ABRIR</div>-->
+			
+			<table class="tbl-elegir">
+				<tr>
+					<td class="elegir-imagen tres-cols una-row">
+						<span class="click-drag">click para arrastrar</span>
+						<br><br>
+						<span class="btn-elegir">Elegir imagen</span>
+					</td>
+					<td class="elegir-imagen tres-cols una-row">
+						<span class="click-drag">click para arrastrar</span>
+						<br><br>
+						<span class="btn-elegir">Elegir imagen</span>
+					</td>
+					<td class="elegir-imagen tres-cols una-row">
+						<span class="click-drag">click para arrastrar</span>
+						<br><br>
+						<span class="btn-elegir">Elegir imagen</span>
+					</td>	
+				</tr>
+			</table>
+				
+			
+			<!-- FIN CONTENIDO -->
+
+			<div class="clear"></div>
+			
+			<!-- FOOTER -->
+			<div id="footer" style="display:none">
+				<div id="contenedor-footer">	
+					<div id="cuadros-footer"></div>
+					<div id="contenedor-lista">
+						 <div id="titulo-lista">Nos encanta la impresi&oacute;n de fotos!</div> 
+						 <div class="lista-footer">
+						 	. Mejor impresi&oacute;n de la lona de la calidad en cualquier lugar! <br>
+							. Atenci&oacute;n al cliente inmejorable. <br>
+							. Pruebas digitales gratuitos. <br>
+							. Gratis de im&aacute;genes puesta a punto PicturePerfect &#8482;. <br>
+							. 100% "Love it" garant&iacute;a de por vida! <br>
+						 </div>
+					 </div>
+					 <div id="contacto">
+					 	<img src="img/contacto.png">
+					 </div>
+					 <div id="redes-sociales">
+					 	<a href="#"><img src="img/instagram-logo.jpg"></a>
+					 	<a href="#"><img src="img/facebook-logo.jpg"></a>
+					 	<a href="#"><img src="img/twitter-logo.jpg"></a>
+					 </div>
+				 </div>
+			</div>
+			<!-- FIN FOOTER -->
+
+		</div>
+
+	</div>
+
+	<!-- MODAL -->
+	<div id="modal-imagen" class="modal">
+
+		<div id="btns-modal">
+			<div id="btn-fb" class="btn-modal">facebook</div>
+			<div id="btn-ig" class="btn-modal">instagram</div>
+			<div id="btn-pc" class="btn-modal">tu compu</div>
+		</div>
+		<div class="clear"></div>
+
+		<div id="tab-fb">
+			
+			<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" id="btn-fbk">
+			</fb:login-button>
+
+			<div id="status">
+			</div>
+
+			<div id="imagenes">
+			</div>
+
+			<div id="template-imagen" class="hidden">
+				<div class="imagen-sel">
+					<img src="#URL_IMAGEN#" style="height:100px" id="#IMG_GRANDE#">
+				</div>
+			</div>
+			<div id="next-page" class="btn-continuar">Siguiente >></div>
+			<div id="prev-page" class="btn-continuar"><< Anterior</div>
+			<input id="next-hidden" type="hidden"></input>
+			<input id="prev-hidden" type="hidden"></input>
+
+		</div>
+
+		<div id="tab-ig" class="hidden">
+		</div>
+
+		<div id="tab-tupc" class="hidden">
+			<div id="fileuploader">Subir</div>
+		</div>
+
+	</div>
+	<!-- FIN MODAL -->
+</body>
+</html>
+	

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<script src="js/jquery.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/raphael.js"></script>
+	<script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+	<script type="text/javascript" src="js/mapsvg.min.js"></script>
+	<script src="js/jquery.balloon.js"></script>
+
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/bootstrap-responsive.css" rel="stylesheet">
+
+</head>
+
+<body>
+	<div id="map"> </div>
+<div class="modal hide fade" id="myModal">
+</body>
+
+<script type="text/javascript">
+	 $('#map').mapSvg({
+		 
+		 source: 'img/provincia-buenos-aires.svg',
+	      loadingText : 'Cargando Mapa...',
+		  
+		  colors:{                       
+		   // Colors for each region state
+			background: "transparent", // Enter "transparent" for transparent background or "url(/path/image.jpg)" for image
+			selected: "#065A85",// Change color on select to #065A85
+			hover: "#548eac",   // Change color on hover to #548eac
+			// Increase brightness on select by 10
+			selected: 10,      // Decrease brightness on select by 20
+			hover: 10,         // Decrease brightness on hover by 20
+			disabled: "#ffffff",
+			stroke: "#444"
+                },
+		
+		onClick: function(e,m){
+			
+			
+			
+        	//excepcion por que san fernando esta dividido en dos, ciudad - islas
+			if(this.node.id == 'San_Fernando') $('#myModal').load('http://www.juntaelectoral.gba.gov.ar/distritos.php',{'distrito':105}).modal('show') ;
+			//otras excepciones
+			if(this.node.id == 'Oceano_Atlantico') return;
+			if(this.node.id == 'Uruguay') return;
+				
+			//$('#myModal').load('http://www.juntaelectoral.gba.gov.ar/distritos.php',{'distrito':this.node.id}).modal('show') ;
+			//$(this.node.id).balloon({ contents: $('h1').clone() });
+			alert(this.node.id);
+		
+             
+    	},		
+		tooltipsMode: true,
+		zoom: true, 
+		pan: true,
+		responsive:true,
+		
+	 }
+	  	  
+	 
+	 );
+	 $('#secciones ul li a').click(function(e){
+		 
+		 //$('#myModal').load('secciones.php',{'seccion':this.id});
+	 
+	     alert(this.id);
+	 });
+	 
+	 
+	 $('ul#listadoLocalidades li a').click(function(e){
+		 
+		 var param = $(this).attr("href");
+		 
+		 //$('#myModal').load('distritos.php',{'distrito':param}).modal('show') ;
+		 return false;
+		 alert(param);
+		 
+		 });
+	 
+	 </script>
+
+</body>
+</html>
+

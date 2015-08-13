@@ -1,0 +1,42 @@
+<html>
+<head>
+	<title></title>
+	<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script>
+	$(function() {
+		$(".elegir-tipo").mouseover(function() {
+			$(".elegir-tipo td").css({"background-color": "#ff9b9b", "border": "3px solid #d86262"})
+		});
+
+		$(".elegir-tipo").mouseout(function() {
+			$(".elegir-tipo td").css({"background-color": "#67a3c7", "border": "3px solid #ebebeb"})
+		});
+	})
+	</script>
+	<style type="text/css">
+
+		.elegir-tipo td {
+			background-color: #67a3c7;
+			border: 3px solid #ebebeb;
+			width:60px;
+			height:60px;
+			cursor: pointer;
+		}
+
+	</style>
+</head>
+<body>
+
+	<table class="elegir-tipo">
+	 <tr>
+	   <td></td>
+	   <td rowspan="2"></td>
+	   <td></td>
+	 </tr>
+	 <tr>
+	   <td></td>
+	   <td></td>
+	 </tr>
+	</table>
+</body>
+</html>

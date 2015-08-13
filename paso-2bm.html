@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css/general.css">
+	<link href='http://fonts.googleapis.com/css?family=Lato:400,700|Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  	<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script>
+	$(function() {
+
+		$("#ec_1").hover( function() {
+      		$(this).attr("src", "img/cantidad-img/2ph.jpg");
+    	 });    
+		$("#ec_1").mouseout( function() {
+        	$(this).attr("src", "img/cantidad-img/2p.jpg");
+     	});
+
+     	$("#ec_2").hover( function() {
+      		$(this).attr("src", "img/cantidad-img/3ph.jpg");
+    	 });    
+		$("#ec_2").mouseout( function() {
+        	$(this).attr("src", "img/cantidad-img/3p.jpg");
+     	});
+
+     	$("#ec_3").hover( function() {
+      		$(this).attr("src", "img/cantidad-img/3ah.jpg");
+    	 });    
+		$("#ec_3").mouseout( function() {
+        	$(this).attr("src", "img/cantidad-img/3a.jpg");
+     	});
+
+     	$("#ec_4").hover( function() {
+      		$(this).attr("src", "img/cantidad-img/2ah.jpg");
+    	 });    
+		$("#ec_4").mouseout( function() {
+        	$(this).attr("src", "img/cantidad-img/2a.jpg");
+     	});
+
+	})
+
+	</script>
+</head>
+<body>
+	<div>
+		<!-- HEADER -->
+		<div id="header" class="fondo-menu">
+			<div id="contenedor-header">
+				<a href="/"><div id="logo-wp"></div></a>
+				<div id="menu">
+					<span class="item-menu">Sobre Wallplot</span>
+					<span class="item-menu item-seleccionado">Comencemos</span>
+					<span class="item-menu">Inspiracion</span>
+					<span class="item-menu">Tama&ntilde;os y precios</span>
+					<span class="item-menu">Contactenos</span>
+			</div>
+			</div>
+		</div>
+		<!-- FIN HEADER -->
+		<!-- CONTENIDO -->
+		<div id="contenedor">
+
+			<div class="pasos">
+				<div class="numero-pasos">
+					<img src="img/paso-2.jpg">
+				</div>	
+				<div class="titulo-pasos pasos-oscuro">
+					eleg&iacute; la medida de tu lienzo
+				</div>
+			</div>	
+			<div id="contenedor-pasos-sub">
+				<div class="pasos-sub">
+					B- Selecciona la cantidad de partes que lo conforman
+				</div>	
+				<div class="btn-continuar">
+					Continuar >
+				</div>
+			</div>
+
+			<div id="elegir-cantidad">
+				<div style="margin-top: 40px">
+					<a href="#"><img src="img/cantidad-img/2p.jpg" id="ec_1" class="cuadrado-ec"></a>
+					<a href="#"><img src="img/cantidad-img/2a.jpg" id="ec_4" class="cuadrado-ec"></a>
+				</div>
+				<div style="margin-top: 40px">
+					<a href="#"><img src="img/cantidad-img/3a.jpg" id="ec_3" class="cuadrado-ec"></a>
+					<a href="#"><img src="img/cantidad-img/3p.jpg" id="ec_2" class="cuadrado-ec"></a>				
+				</div>
+			</div>
+		</div>
+</body>
+</html>			

@@ -1,6 +1,6 @@
 function calcular_tamanio_lienzo()
 {
-	const MAX_WIDTH = 996;
+	const MAX_WIDTH = 988;
 	const MAX_HEIGHT = 500;
 
 	orden = localStorage.getItem("wallplot_order");
@@ -35,12 +35,61 @@ function nueva_orden(tipo)
 	location.href = "paso-2-" + tipo + ".html.php";
 }
 
+function validar_seleccion(forma)
+{
+	if (forma == "simple")
+	{
+		if ( !$("input[name=forma-radio]").prop("checked")  )
+		{
+			alert("Debe elegir una forma para poder continuar con su compra.");
+			return false;
+		}
+		else
+		{
+			if ($("#cmbSize").val().split("_")[2] == "rectangulo" && !$("input[name=disposicion]:checked").val())
+			{
+				alert("Debe elegir una disposicion de la forma para poder continuar con su compra.");
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+	}
+	else if (forma == "multiple")
+	{
+		if ( !$("input[name=cant_paneles]").prop("checked")  )
+		{
+			alert("Debe elegir una forma para poder continuar con su compra.");
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	else
+	{
+		return true;
+	}
+
+	
+}
+
 function elegir_medidas()
 {
 	orden = localStorage.getItem("wallplot_order");
 	orden = JSON.parse(orden);
 
 	tipo = orden.tipo;
+
+	// Si no eligio ninguna forma no lo dejo continuar
+	var resultado = validar_seleccion(tipo);
+	if (!resultado)
+	{
+		return;
+	}
 
 	orden.medidas = new Object();
 	orden.medidas.width = $("#cmbSize").val().split("_")[0];

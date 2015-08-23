@@ -170,6 +170,33 @@
 			  increaseArea: '20%'
 			});
 
+			$('input[name=cant_paneles]').on('ifChecked', function(event){
+
+			  	// Actualizo el preview del tamaño cuando hay click en un radio
+		    	value = $("#cmbSize").val();
+		    	disposicion = $("input[name=disposicion]:checked").val();
+				if (disposicion == "vertical")
+				{
+					width = parseInt(value.split("_")[1]);
+					height = parseInt(value.split("_")[0]);
+				}
+				else
+				{
+					width = parseInt(value.split("_")[0]);
+					height = parseInt(value.split("_")[1]);
+				}
+				
+
+				new_h = Math.round((height*290)/175);
+				new_w = Math.round(width * (new_h/height));
+
+				template = $("#template_size").html();
+				template = template.replace(/__WIDTH__/g, new_w + "px");
+				template = template.replace(/__HEIGHT__/g, new_h + "px");
+
+				$("#size").html(template);	
+			});
+
 		})
 
 		</script>

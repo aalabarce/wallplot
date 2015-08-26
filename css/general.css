@@ -1,4 +1,6 @@
 /* Resets */
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, sub, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
 	margin:0;
 	padding:0;
@@ -75,6 +77,8 @@ a {
 	float: left;
 	text-align: center;
 	line-height: 77px;
+	color: #FFF;
+    font-size: 16px;
 }
 
 .item-menu:hover {
@@ -805,3 +809,193 @@ td.paneles {
 	float: right;
 }
 /* FIN DETALLE COMPRA */
+
+/* FORMULARIO DE CONTACTO */
+
+/*html{    background:url(http://thekitemap.com/images/feedback-img.jpg) no-repeat;
+  background-size: cover;
+  height:100%;
+}*/
+
+#feedback-page{
+	text-align:center;
+}
+
+#form-main{
+	width:100%;
+	float:left;
+	padding-top:0px;
+	height: 500px;
+}
+
+#form-div {
+	background-color:rgba(72,72,72,0.4);
+	padding-left:35px;
+	padding-right:35px;
+	padding-top:35px;
+	padding-bottom:50px;
+	width: 450px;
+	float: left;
+	left: 50%;
+	position: absolute;
+  margin-top:30px;
+	margin-left: -260px;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+}
+
+#form-div .feedback-input {
+	color:#3c3c3c;
+	font-family: Helvetica, Arial, sans-serif;
+  font-weight:500;
+	font-size: 18px;
+	border-radius: 0;
+	line-height: 22px;
+	background-color: #fbfbfb;
+	padding: 13px 13px 13px 54px;
+	margin-bottom: 10px;
+	width:100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+  border: 3px solid rgba(0,0,0,0);
+}
+
+#form-div .feedback-input:focus{
+	background: #fff;
+	box-shadow: 0;
+	border: 3px solid #3498db;
+	color: #3498db;
+	outline: none;
+  padding: 13px 13px 13px 54px;
+}
+
+#form-div .focused{
+	color:#30aed6;
+	border:#30aed6 solid 3px;
+}
+
+/* Icons ---------------------------------- */
+#form-div #name{
+	background-image: url(http://rexkirby.com/kirbyandson/images/name.svg);
+	background-size: 30px 30px;
+	background-position: 11px 8px;
+	background-repeat: no-repeat;
+}
+
+#form-div #name:focus{
+	background-image: url(http://rexkirby.com/kirbyandson/images/name.svg);
+	background-size: 30px 30px;
+	background-position: 8px 5px;
+  background-position: 11px 8px;
+	background-repeat: no-repeat;
+}
+
+#form-div #email{
+	background-image: url(http://rexkirby.com/kirbyandson/images/email.svg);
+	background-size: 30px 30px;
+	background-position: 11px 8px;
+	background-repeat: no-repeat;
+}
+
+#form-div #email:focus{
+	background-image: url(http://rexkirby.com/kirbyandson/images/email.svg);
+	background-size: 30px 30px;
+  background-position: 11px 8px;
+	background-repeat: no-repeat;
+}
+
+#form-div #comment{
+	background-image: url(http://rexkirby.com/kirbyandson/images/comment.svg);
+	background-size: 30px 30px;
+	background-position: 11px 8px;
+	background-repeat: no-repeat;
+}
+
+#form-div textarea {
+    width: 100%;
+    height: 150px;
+    line-height: 150%;
+    resize:vertical;
+}
+
+#form-div input:hover, #form-div textarea:hover,
+#form-div input:focus, #form-div textarea:focus {
+	background-color:white;
+}
+
+#form-div #button-blue{
+	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+	float:left;
+	width: 100%;
+	border: #fbfbfb solid 4px;
+	cursor:pointer;
+	background-color: #3498db;
+	color:white;
+	font-size:24px;
+	padding-top:22px;
+	padding-bottom:22px;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+  margin-top:-4px;
+  font-weight:700;
+}
+
+#form-div #button-blue:hover{
+	background-color: rgba(0,0,0,0);
+	color: #0493bd;
+}
+	
+#form-div .submit:hover {
+	color: #3498db;
+}
+	
+#form-div .ease {
+	width: 0px;
+	height: 74px;
+	background-color: #fbfbfb;
+	-webkit-transition: .3s ease;
+	-moz-transition: .3s ease;
+	-o-transition: .3s ease;
+	-ms-transition: .3s ease;
+	transition: .3s ease;
+}
+
+#form-div .submit:hover .ease{
+  width:100%;
+  background-color:white;
+}
+
+@media only screen and (max-width: 580px) {
+	#form-div{
+		left: 3%;
+		margin-right: 3%;
+		width: 88%;
+		margin-left: 0;
+		padding-left: 3%;
+		padding-right: 3%;
+	}
+}
+
+/* FIN FORMULARIO DE CONTACTO */
+
+/* PRECIOS */
+
+.tbl-precios {
+	color: #000;
+}
+
+.tbl-precios th {
+	background-color: #538eb0;
+	color: #FFF; 
+	font-weight: 700;
+	padding: 0.75em 1.5em !important;
+}
+
+.tbl-precios td {
+	text-align: left;
+	padding: 0.75em 1.5em !important;
+}
+/* FIN PRECIOS */

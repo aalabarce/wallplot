@@ -16,10 +16,10 @@
 				<a href="/"><div id="logo-wp"></div></a>
 				<div id="menu">
 					<span class="item-menu">Sobre Wallplot</span>
-					<span class="item-menu item-seleccionado">Comencemos</span>
-					<span class="item-menu">Inspiracion</span>
-					<span class="item-menu">Tama&ntilde;os y precios</span>
-					<span class="item-menu">Contactenos</span>
+					<a href="comencemos.html.php"><span class="item-menu item-seleccionado">Comencemos</span></a>
+					<a href="inspiracion.html.php"><span class="item-menu">Inspiracion</span></a>
+					<a href="precios.html.php"><span class="item-menu">Tama&ntilde;os y precios</span></a>
+					<a href="contacto.html.php"><span class="item-menu">Contactenos</span></a>
 			</div>
 			</div>
 		</div>

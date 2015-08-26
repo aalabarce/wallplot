@@ -39,14 +39,14 @@ function validar_seleccion(forma)
 {
 	if (forma == "simple")
 	{
-		if ( !$("input[name=forma-radio]").prop("checked")  )
+		if ( !$("input[name=forma-radio]:checked").length  )
 		{
 			alert("Debe elegir una forma para poder continuar con su compra.");
 			return false;
 		}
 		else
 		{
-			if ($("#cmbSize").val().split("_")[2] == "rectangulo" && !$("input[name=disposicion]:checked").val())
+			if ($("#cmbSize").val().split("_")[2] == "rectangulo" && !$("input[name=disposicion]:checked").length)
 			{
 				alert("Debe elegir una disposicion de la forma para poder continuar con su compra.");
 				return false;
@@ -59,7 +59,7 @@ function validar_seleccion(forma)
 	}
 	else if (forma == "multiple")
 	{
-		if ( !$("input[name=cant_paneles]").prop("checked")  )
+		if ( !$("input[name=cant_paneles]:checked").length )
 		{
 			alert("Debe elegir una forma para poder continuar con su compra.");
 			return false;
@@ -318,7 +318,6 @@ function dibujarImagenes(imagenes)
 		html = $("#template-imagen").html();
 		html = html.replace(/#URL_IMAGEN#/g, e.picture);
 		html =  html.replace(/#IMG_GRANDE#/g, e.source);
-		console.log(html);
 		//$("#imagenes").append(html);
 		
 

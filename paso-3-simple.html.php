@@ -119,7 +119,7 @@
 		</div>
 
 		<div id="tab-ig" class="hidden">
-			<iframe src="/instagram/home.php" width="400" height="550" frameborder="0"></iframe>
+			<a href='javascript: window.open("https://api.instagram.com/oauth/authorize?client_id=56dbea395e1e4f018f02f90a8ef811c7&redirect_uri=http://www.wallplot.com/instagram/success.php&scope=basic&response_type=code", "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=400, height=400");'><img src="img/instagram_normal.png"></a>
 		</div>
 
 		<div id="tab-tupc" class="hidden">
@@ -163,6 +163,10 @@
 
 				$(".tbl-elegir").width(width);
 				$(".tbl-elegir").height(height);
+
+				$(".btn-elegir").click(function() {
+					$td_elegido = $(this).closest("table");
+				})
 			})
 
 			$("#fileuploader").uploadFile({

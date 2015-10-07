@@ -542,14 +542,14 @@ function elegir_foto_instagram(url_foto)
 	if (! $.isEmptyObject($.modal) )
 	{
 		$td_elegido.css("background-image", "url(" + url_foto + ")");
-		$.modal.close();
 	}
 	else
 	{
 		window.opener.$td_elegido.css("background-image", "url(" + url_foto + ")");
 		window.close();
 	}
-	
+
+	$.modal.close();
 }
 
 

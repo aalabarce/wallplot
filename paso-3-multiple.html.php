@@ -172,6 +172,10 @@
 
 				$(".tbl-elegir").width(width);
 				$(".tbl-elegir").height(height);
+
+				$(".btn-elegir").click(function() {
+					$td_elegido = $(this).closest("table");
+				})
 			})
 		})	
 	</script>
